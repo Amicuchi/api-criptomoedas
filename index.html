@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coin Market Cap || API Bitcoin</title>
+
+    <link 
+        rel="stylesheet" 
+        type="text/css" 
+        href="./style.css" 
+    /> 
+
+    <!-- Font Awesome Script -->
+    <link 
+        rel="stylesheet" 
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" 
+        integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" 
+        crossorigin="anonymous" 
+        referrerpolicy="no-referrer" 
+    />
+
+</head>
+<body>
+
+    <div class="container">
+
+        <nav class="navbar">
+            <div class="logo"><a href="#">Coin Market <span>Cap</span></a></div>
+            <ul class="menu">
+                <li><a href="#" >Página Inicial</a></li>
+                <li><a href="#about" >Sobre</a></li>
+                <li><a href="#contact" >Contato</a></li>
+            </ul>
+        </nav>
+    
+        <main id="coins"></main>
+    
+    </div>
+
+
+    <!-- about section start -->
+    <section class="about" id="about">
+        <div class="max-width">
+            <h2 class="title">Sobre mim</h2>
+
+            <div class="about-content">
+                <div class="colum left">
+                    <img src="./perfil.png" alt="">
+                </div>
+                <div class="colum right">
+                    <div class="text">Eu sou o Anderson e sou um <spam> Dev Front-End</spam></div>
+                    <p>Formada em Análise e Desenvolvimento de Sistemas desde 2016.
+                    <p>Te ajudo a criar sua identidade online.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- contact section start -->
+    <section class="contact" id="contact">
+        <div class="max-width">
+            <h2 class="title">Contato</h2>
+            <div class="contact-content">
+                <div class="colum left">
+                    <div class="icons">
+                        <div class="row">
+                            <i class="fab fa-whatsapp"></i>
+                            <div class="info">
+                                <div class="sub-title">(16) 98809-5749</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <i class="fas fa-map-marked-alt"></i>
+                            <div class="info">
+                                <div class="sub-title">Ribeirão Preto - SP - Brasil</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <i class="fas fa-envelope"></i>
+                            <div class="info">
+                                <div class="sub-title">AndersonAmicuchi@gmail.com</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="colum right">
+                    <div class="text">Mande uma mensagem</div>
+                    <form action="https://api.staticforms.xyz/submit" method="POST">
+                        <!-- AccessKey é uma chave de acesso à API do site de envio de emails.
+                             Cada usuário terá uma chave diferente, sendo necessário um novo cadastro para cada usuário. 
+                             Para gerar uma nova chave da API, basta acessar o site staticforms.xyz -->
+                        <input type="hidden" name="accessKey" value="4f60f678-12b7-4675-92b6-2e550a8c498a">
+                        
+                        <!-- O input redirectTo, redireciona o usuário para uma página de sucesso. -->
+                        <input type="hidden" name="redirectTo" id="enviado" value="https://tatianemachado.netlify.app/">
+
+                        <!-- For spam protection add following field -->
+                        <input type="text" name="honeypot" style="display: none;">
+
+                        <div class="fields">
+                            <div class="field name">
+                                <input name="name" type="text" placeholder="Nome" required>
+                            </div>
+                            <div class="field email">
+                                <input name="email" type="text" placeholder="E-mail" required>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <input name="subject" type="subject" placeholder="Assunto" required>
+                        </div>
+                        <div class="field textarea">
+                            <textarea 
+                                name="message"
+                                cols="30" 
+                                rows="10" placeholder="Digite aqui a sua mensagem"
+                                required
+                            ></textarea>
+                        </div>
+                        <div class="button">
+                            <button type="submit" value="Submit" id="enviar" >Enviar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <footer>
+        <span>Desenvolvido por <a href="https://www.linkedin.com/in/amicuchi/">Anderson Amicuchi</a> | <span class="far fa-copyright"></span>2021 - Todos os direitos reservados.</span>
+    </footer>
+
+
+
+    <script type="text/javascript">
+        // My API Key
+        var apikey = {
+            key: 'e5990f62-8a99-4b3b-88e6-a29c58b74d06'
+        };
+
+        // GET Fetch Requisition
+        fetch('https://pro-api.coinmarketcap.com/v1/cryptocurrency/map?CMC_PRO_API_KEY=' + apikey.key)
+            .then( (response) => {
+                if(!response.ok) throw new Error ('Erro ao executar a requisição, status ' + response.status);
+                return response.json();
+            })
+        .then( (api) => {
+            // console.log(api);
+            var text = "";
+
+            // Get 10 coins and symbols
+            for (let i = 0; i < 15; i++){
+                // Showing API information
+                text += `
+                    <div class="card">
+                        <img src="./coin.png" alt="coin">
+                        <div class="media-body">
+                            <h5>${api.data[i].name}</h5>
+                            <p>${api.data[i].symbol}</p>
+                            <p>${api.data[i].first_historical_data}</p>
+                        </div>
+                    </div>
+                `;
+
+                document.getElementById("coins").innerHTML = text;
+            }
+
+        })
+        .catch( (error) => {
+            console.error(error.message);
+        });
+
+    </script>
+</body>
+</html>
