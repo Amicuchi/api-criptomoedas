@@ -21,11 +21,12 @@
         referrerpolicy="no-referrer" 
     />
 
+    <script src="./script.js"></script>
 </head>
 <body>
 
-    <div class="container">
-
+    <!-- main section start -->
+    <section class="container">
         <nav class="navbar">
             <div class="logo"><a href="#">Coin Market <span>Cap</span></a></div>
             <ul class="menu">
@@ -35,9 +36,9 @@
             </ul>
         </nav>
     
+        <!-- Digital Coins Section Start -->
         <main id="coins"></main>
-    
-    </div>
+    </section>
 
 
     <!-- about section start -->
@@ -128,52 +129,9 @@
         </div>
     </section>
 
-
-
     <footer>
         <span>Desenvolvido por <a href="https://www.linkedin.com/in/amicuchi/">Anderson Amicuchi</a> | <span class="far fa-copyright"></span>2021 - Todos os direitos reservados.</span>
     </footer>
 
-
-
-    <script type="text/javascript">
-        // My API Key
-        var apikey = {
-            key: 'e5990f62-8a99-4b3b-88e6-a29c58b74d06'
-        };
-
-        // GET Fetch Requisition
-        fetch('https://pro-api.coinmarketcap.com/v1/cryptocurrency/map?CMC_PRO_API_KEY=' + apikey.key)
-            .then( (response) => {
-                if(!response.ok) throw new Error ('Erro ao executar a requisição, status ' + response.status);
-                return response.json();
-            })
-        .then( (api) => {
-            // console.log(api);
-            var text = "";
-
-            // Get 10 coins and symbols
-            for (let i = 0; i < 15; i++){
-                // Showing API information
-                text += `
-                    <div class="card">
-                        <img src="./coin.png" alt="coin">
-                        <div class="media-body">
-                            <h5>${api.data[i].name}</h5>
-                            <p>${api.data[i].symbol}</p>
-                            <p>${api.data[i].first_historical_data}</p>
-                        </div>
-                    </div>
-                `;
-
-                document.getElementById("coins").innerHTML = text;
-            }
-
-        })
-        .catch( (error) => {
-            console.error(error.message);
-        });
-
-    </script>
 </body>
 </html>

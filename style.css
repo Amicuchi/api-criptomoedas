@@ -92,6 +92,7 @@ main{
 .card{
     background: rgb(27, 27, 27);
     padding-bottom: 20px;
+    padding-top: 20px;
     display: inline-flex;
     width: 350px;
     margin: 10px;
@@ -105,15 +106,18 @@ main{
 .card img{
     width: 100px;
     height: 100px;
+    padding: 7px;
 }
 .card .media-body{
     padding-left: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
-
 .card .media-body h5{
     color: var(--main-color);
 }
-
 
 
 /* ********************* */
