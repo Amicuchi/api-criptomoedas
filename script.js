@@ -19,15 +19,20 @@ fetch('https://pro-api.coinmarketcap.com/v1/cryptocurrency/map?CMC_PRO_API_KEY='
 
         // Get "i" coins and symbols
             for (let i = 0; i < 5; i++){
+
+                var r = Math.floor(Math.random() * 3000);
+                // Número aleatório para apresentar criptomoedas aleatórias
+                console.log(r);
+
                 // Showing API information
                 text += `
                     <div class="card">
-                        <img src="./coin.png" alt="${api.data[i].name}">
+                        <img src="./coin.png" alt="${api.data[r].name}">
                         <div class="media-body">
-                            <h5>${api.data[i].name}</h5>
-                            <p>${api.data[i].symbol}</p>
-                            <p>${api.data[i].first_historical_data}</p>
-                            <p>${api.data[i].last_historical_data}</p>
+                            <h5>${api.data[r].name}</h5>
+                            <p>${api.data[r].symbol}</p>
+                            <p>${api.data[r].first_historical_data}</p>
+                            <p>${api.data[r].last_historical_data}</p>
                         </div>
                     </div>
                 `;
