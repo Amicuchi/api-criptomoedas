@@ -3,7 +3,7 @@ var apikey = {
     // IMPORTANTE: 
     // Cada key é pessoal e intransferível.
     // Para fazer o seu site funcionar, por favor, utilize sua própria key.
-    key: 'e5990f62-8a99-4b3b-88e6-a29c58b74d06'
+    key: 'Excluida'
 };
 
 // GET Fetch Requisition
